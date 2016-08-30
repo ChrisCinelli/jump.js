@@ -1,6 +1,6 @@
 {
   "name":        "jump.js-cancelable",
-  "version":     "1.1.1-alpha",
+  "version":     "1.1.2-alpha",
   "description": "A small, modern, dependency-free smooth scrolling library.",
   "homepage":    "https://github.com/bretkikehara/jump.js",
   "main":        "dist/jump.min.js",
