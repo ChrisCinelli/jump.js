@@ -70,7 +70,7 @@ gulp.task('js', () => {
 
       // write the JS and sourcemap
       fs.appendFileSync(dist, files.code)
-      fs.writeFileSync('dist/maps/jump.js.map', files.map.toString())
+      fs.writeFileSync('dist/jump.js.map', files.map.toString())
     })
 })
 
@@ -84,7 +84,7 @@ const sendMaps = (req, res, next) => {
   const extension = filename.split('.').pop()
 
   if(extension === 'css' || extension === 'js') {
-    res.setHeader('X-SourceMap', '/maps/' + filename + '.map')
+    res.setHeader('X-SourceMap', '/' + filename + '.map')
   }
 
   return next()
