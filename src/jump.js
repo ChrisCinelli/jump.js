@@ -148,7 +148,7 @@
       }
 
       // cache starting position
-      stop = start = container ? container.scrollTop : location()
+      stop = start = container ? container.scrollTop - top(container) : location()
 
       // resolve target
       switch(typeof target) {
