@@ -1,4 +1,15 @@
-(function() {
+(function (root, factory) {
+    if (typeof define === 'function' && define.amd) {
+        // AMD. Register as an anonymous module.
+        define([], factory);
+    } else if (typeof module !== "undefined" && module.exports) {
+        // CommonJS/Node module
+        module.exports = factory();
+    } else {
+        // Browser globals
+        root.jump = factory();
+    }
+}(this, function() {
   function easeInOutQuad (t, b, c, d){
     t /= d / 2
     if(t < 1) return c / 2 * t * t + b
@@ -193,6 +204,8 @@
     };
   }
 
-  module.exports = Jump()
-  module.exports.Jump = Jump;
-})();
+  var jump = Jump();
+  jump.Jump = Jump;
+  
+  return jump;
+}));
