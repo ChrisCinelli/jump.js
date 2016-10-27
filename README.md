@@ -212,12 +212,12 @@ j1 = Jump();
 j2 = Jump();
 
 var cancel1 = j1.jump('.target', {
-  offset: -10,
+  container: '.container1'
   duration: 2000
 })
 
 var cancel2 = j2.jump('.target2', {
-  offset: -20,
+  container: '.container2'
   duration: 500
 })
 
