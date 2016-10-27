@@ -50,7 +50,7 @@ const read = {
 
 const write = {
   format: 'umd',
-  exports: 'default',
+  exports: 'named',
   moduleName: 'Jump',
   sourceMap: true
 }

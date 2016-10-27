@@ -2,6 +2,8 @@
 
 [![Jump.js on NPM](https://img.shields.io/npm/v/jump.js.svg?style=flat-square)](https://www.npmjs.com/package/jump.js)
 
+582 bytes gzipped (1.07KB uncompressed)
+
 A small, modern, dependency-free smooth scrolling library.
 
 * [Demo Page](http://callmecavs.github.io/jump.js/) (Click the arrows!)
@@ -32,7 +34,7 @@ Import Jump, naming it according to your preference.
 ```es6
 // import Jump
 
-import jump from 'jump.js'
+import { jump } from 'jump.js'
 ```
 
 ### Call
@@ -163,6 +165,69 @@ jump('.target', {
 ```
 
 See [easing.js](https://github.com/callmecavs/jump.js/blob/master/src/easing.js) for the definition of `easeInOutQuad`, the default easing function. Credit for this function goes to Robert Penner.
+
+### cancel scrolling
+
+A way to cancel the scrolling.
+
+```es6
+var cancel = jump('.target', {
+  container: '.scrollable-div'
+})
+
+setTimeout(function(){
+  cancel();
+}, 500;)
+
+```
+
+### is it scrolling?
+
+A way to know if it is currently scrolling.
+
+```es6
+// import Jump
+
+import { jump, isJumping } from 'jump.js'
+
+jump('.target', {
+  offset: -10
+})
+
+setInterval(function(){
+  if (isJumping()) console.log('It is scrolling!');
+}, 50);
+
+```
+
+### More than one instance
+
+If you need to scroll more than one thing at the time
+```es6
+// import Jump
+
+import { Jump } from 'jump.js'
+
+j1 = Jump();
+j2 = Jump();
+
+var cancel1 = j1.jump('.target', {
+  offset: -10,
+  duration: 2000
+})
+
+var cancel2 = j2.jump('.target2', {
+  offset: -20,
+  duration: 500
+})
+
+
+setInterval(function(){
+  if (j1.isJumping()) console.log('J1 is scrolling!');
+  if (j2.isJumping()) console.log('J2 is scrolling!');
+}, 50);
+
+```
 
 ### a11y
 
