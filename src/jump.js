@@ -43,6 +43,8 @@
     let requestID       // requestAnimationFrame id               (number)
     
     let container
+    
+    let absolute
 
     // scroll position helper
 
@@ -135,12 +137,13 @@
 
     function jump(target, options = {}) {
       // resolve options, or use defaults
-      duration = options.duration || 1000
-      offset   = options.offset   || 0
-      callback = options.callback                       // "undefined" is a suitable default, and won't be called
-      easing   = options.easing   || easeInOutQuad
-      a11y     = options.a11y     || false
+      duration  = options.duration || 1000
+      offset    = options.offset   || 0
+      callback  = options.callback                       // "undefined" is a suitable default, and won't be called
+      easing    = options.easing   || easeInOutQuad
+      a11y      = options.a11y
       container = options.container
+      absolute  = options.absolute
       
       // if it is not a string it assume that the contaienr is a DOM element
       if (container && typeof container === 'string') {
@@ -156,7 +159,7 @@
         case 'number':
           element = undefined           // no element to scroll to
           a11y    = false               // make sure accessibility is off
-          stop    += target
+          stop    = absolute ? target : stop + target
         break
 
         // scroll to element (node)
