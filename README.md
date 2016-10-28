@@ -66,6 +66,7 @@ jump('.target', {
 Explanation of each option follows:
 
 * [target](#target)
+* [absolute](#absolute)
 * [duration](#duration)
 * [offset](#offset)
 * [callback](#callback)
@@ -74,7 +75,7 @@ Explanation of each option follows:
 
 ### target
 
-Scroll _from the current position_ by passing a number of pixels.
+Scroll _from the current position_ by passing a number of pixels when [`absolute`](#absolute) equal to `false` (default).
 
 ```es6
 // scroll down 100px
@@ -102,6 +103,16 @@ jump(node)
 // the element referenced by the selector is determined using document.querySelector
 
 jump('.target')
+```
+
+### absolute
+
+If `true`, the number passed in `target` is interpreted in absolute terms.
+
+```es6
+// Scroll to the very top
+
+jump(0, {absolute : true});
 ```
 
 ### duration
@@ -159,12 +170,32 @@ jump('.target', {
 Easing function used to transition the `jump()`.
 
 ```es6
+function step(a,b,c,d) { return b + c }
+
 jump('.target', {
-  easing: easeInOutQuad
+  easing: step; // step function, scroll immediately to the location
 })
 ```
 
 See [easing.js](https://github.com/callmecavs/jump.js/blob/master/src/easing.js) for the definition of `easeInOutQuad`, the default easing function. Credit for this function goes to Robert Penner.
+
+### a11y
+
+If enabled, _and scrolling to an element_:
+
+* add a [`tabindex`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/tabindex) to, and
+* [`focus`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/focus) the element
+
+```es6
+jump('.target', {
+  a11y: true
+})
+```
+
+Note that this option is disabled by default because it has _visual implications_ in many browsers. Focusing an element triggers the `:focus` CSS state selector, and is often accompanied by an `outline`.
+
+
+## Control during scrolling 
 
 ### cancel scrolling
 
@@ -200,7 +231,7 @@ setInterval(function(){
 
 ```
 
-### More than one instance
+## More than one instance
 
 If you need to scroll more than one thing at the time
 ```es6
@@ -229,20 +260,6 @@ setInterval(function(){
 
 ```
 
-### a11y
-
-If enabled, _and scrolling to an element_:
-
-* add a [`tabindex`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/tabindex) to, and
-* [`focus`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/focus) the element
-
-```es6
-jump('.target', {
-  a11y: true
-})
-```
-
-Note that this option is disabled by default because it has _visual implications_ in many browsers. Focusing an element triggers the `:focus` CSS state selector, and is often accompanied by an `outline`.
 
 ## Browser Support
 
